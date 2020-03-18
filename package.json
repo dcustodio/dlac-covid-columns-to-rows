@@ -1,0 +1,27 @@
+{
+  "name": "dlac-covid-columns-to-rows",
+  "version": "1.0.0",
+  "description": "transform covid timeline data from columns to rows",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint index.js --fix"
+  },
+  "keywords": [
+    "covid19"
+  ],
+  "author": "davidlacustodio@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "line-reader": "^0.4.0",
+    "moment": "^2.24.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
+  }
+}
