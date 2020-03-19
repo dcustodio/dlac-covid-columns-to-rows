@@ -16,11 +16,11 @@ This will create 6 files:
 
 `deaths-rows.csv`
 ```
-date, Province/State, Country/Region, Lat, Long, deaths
-2020-01-22T00:00:00+01:00, Hubei, China, 30.9756, 112.2707, 17
-2020-01-23T00:00:00+01:00, Hubei, China, 30.9756, 112.2707, 17
-2020-01-24T00:00:00+01:00, Hubei, China, 30.9756, 112.2707, 24
-2020-01-22T00:00:00+01:00, , Thailand, 15, 101, 0
-2020-01-23T00:00:00+01:00, , Thailand, 15, 101, 0
-2020-01-24T00:00:00+01:00, , Thailand, 15, 101, 0
+date,Province/State,Country/Region,Lat,Long,deaths
+16-03-2020,Beijing,China,40.1824,116.4142,8
+17-03-2020,Beijing,China,40.1824,116.4142,8
+18-03-2020,Beijing,China,40.1824,116.4142,8
+16-03-2020,,Thailand,15,101,1
+17-03-2020,,Thailand,15,101,1
+18-03-2020,,Thailand,15,101,1
 ```

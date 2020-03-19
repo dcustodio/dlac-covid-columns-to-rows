@@ -34,7 +34,7 @@ Object.keys(FILES).forEach(name => {
         } else {
           cells.forEach((value, index) => {
             if (index < cells.length) {
-              stream.write(`${moment(dates[index], 'M/D/YY').format()},${province},${country},${lat},${long},${value}\n`)
+              stream.write(`${moment(dates[index], 'M/D/YY').format('DD-MM-YYYY')},${province},${country},${lat},${long},${value}\n`)
             }
           })
         }
