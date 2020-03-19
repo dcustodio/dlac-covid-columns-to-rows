@@ -22,19 +22,21 @@ Object.keys(FILES).forEach(name => {
       var stream = fs.createWriteStream(`${name}-rows.csv`)
       // headers: Province/State,Country/Region,Lat,Long, Date 1, Date 2, ... , Date n
       lineReader.eachLine(`${name}.csv`, function (line, last) {
-        const cells = line.split(',')
-        const province = cells.shift()
-        const country = cells.shift()
+        // replace line separators because commas are also used in state and country names.
+        line = line.replace(/,(?! )/gm, ';')
+        const cells = line.split(';')
+        const province = addQuotes(cells.shift())
+        const country = addQuotes(cells.shift())
         const lat = cells.shift()
         const long = cells.shift()
 
         if (lineCount === 0) {
           dates = cells
-          stream.write(`date,${province},${country},${lat},${long},${name}\n`)
+          stream.write(`date;${province};${country};${lat};${long};${name}\n`)
         } else {
           cells.forEach((value, index) => {
             if (index < cells.length) {
-              stream.write(`${moment(dates[index], 'M/D/YY').format('DD-MM-YYYY')},${province},${country},${lat},${long},${value}\n`)
+              stream.write(`${moment(dates[index], 'M/D/YY').format('DD-MM-YYYY')};${province};${country};${lat};${long};${value}\n`)
             }
           })
         }
@@ -48,3 +50,7 @@ Object.keys(FILES).forEach(name => {
     })
   })
 })
+
+function addQuotes (cell) {
+  return cell.startsWith('"') ? cell : `"${cell}"`
+}
