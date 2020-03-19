@@ -30,11 +30,11 @@ Object.keys(FILES).forEach(name => {
 
         if (lineCount === 0) {
           dates = cells
-          stream.write(`date, ${province}, ${country}, ${lat}, ${long}, ${name}\n`)
+          stream.write(`date,${province},${country},${lat},${long},${name}\n`)
         } else {
           cells.forEach((value, index) => {
             if (index < cells.length) {
-              stream.write(`${moment(dates[index], 'M/D/YY').format()}, ${province}, ${country}, ${lat}, ${long}, ${value}\n`)
+              stream.write(`${moment(dates[index], 'M/D/YY').format()},${province},${country},${lat},${long},${value}\n`)
             }
           })
         }
