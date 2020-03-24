@@ -2,6 +2,11 @@
 
 > gets data from [2019 Novel Coronavirus COVID-19 (2019-nCoV) Data Repository by Johns Hopkins CSSE](https://github.com/CSSEGISandData/COVID-19) and writes new CSV files adding a new row per day/country
 
+
+I uploaded the CSV files to [Viur](https://www.viurdata.com) to create an [Interactive dashboard](https://covid.viurdata.com/#/public/0dd16158-451d-4dbe-8d8e-51e2544489e7?Country=Portugal&Country=Spain&Country=France&Country=Belgium&Country=Netherlands&Country=Germany&Country=Italy)
+
+![Dashboard](https://github.com/dcustodio/dlac-covid-columns-to-rows/blob/master/dashboard-20-03-2020.png?raw=true)
+
 ## Running
 
 Run it as any NodeJS program:
