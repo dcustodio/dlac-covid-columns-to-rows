@@ -17,14 +17,26 @@ This will create 6 files:
  - 3 files (deaths.csv, confirmed.csv, recovered.csv) from the Novel Covid-19 Data repository
  - 3 files (deaths-rows.csv, confirmed-rows.csv, recovered-rows.csv) with the transformed data. 
 
-`node index.js --from 19-03-2020`
+### Parameters 
+
+#### from
+
+`--from 19-03-2020`
 
 This will create 3 files with the records from that day (included) onwards: 
  - 3 files (deaths-19-03-2020rows.csv, confirmed-19-03-2020rows.csv, recovered-19-03-2020rows.csv) with the transformed data. 
 
-`node index.js --local`
+#### local
+
+`--local`
 
 Once you got the main files (updated every day) you can just use the local versions using the `--local` flag.
+
+#### file
+
+`--file confirmed`
+
+Generate only one of the files (confirmed|deaths|recovered).  
 
 ## Example output
 

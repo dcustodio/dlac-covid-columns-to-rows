@@ -8,16 +8,27 @@ const FILES =
 {
   confirmed: 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv',
   deaths: 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv',
-  recovered: 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv'
+  recovered: 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv'
 }
 
 // --from 19-03-2020
 const from = argv.from
-// --local
-const local = typeof argv.local !== 'undefined' && argv.local
 
 if (from && !(/^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[012])-20\d\d$/.test(from))) {
   console.error('invalid date format. please use DD-MM-YYYY')
+
+  process.exit(1)
+}
+
+// --local
+const local = typeof argv.local !== 'undefined' && argv.local
+
+
+// file
+const file = argv.file
+
+if (file && !Object.keys(FILES).includes(file)) {
+  console.error(`invalid file "${file}". Available files are: ${Object.keys(FILES).join(', ')}`)
 
   process.exit(1)
 }
@@ -68,17 +79,21 @@ const writeRowFiles = (name) => () => {
 }
 
 Object.keys(FILES).forEach(name => {
-  // we don't need to download the files each time
-  if (local) {
-    console.info(`[local] ${name}`)
-    writeRowFiles(name)()
-  } else {
-    https.get(FILES[name], response => {
-      console.info(`[http] ${name}`)
-      const file = fs.createWriteStream(`${name}.csv`)
-      var stream = response.pipe(file)
-      stream.on('finish', writeRowFiles(name))
-    })
+
+  if (typeof file === 'undefined' || name === file) {
+
+    // we don't need to download the files each time
+    if (local) {
+      console.info(`[local] ${name}`)
+      writeRowFiles(name)()
+    } else {
+      https.get(FILES[name], response => {
+        console.info(`[http] ${name}`)
+        const file = fs.createWriteStream(`${name}.csv`)
+        var stream = response.pipe(file)
+        stream.on('finish', writeRowFiles(name))
+      })
+    }
   }
 })
 
