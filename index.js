@@ -12,17 +12,20 @@ const FILES =
 }
 
 // --from 19-03-2020
-const from = argv.from
+let from = argv.from
 
-if (from && !(/^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[012])-20\d\d$/.test(from))) {
-  console.error('invalid date format. please use DD-MM-YYYY')
+if (from) {
+  if (from.toLowerCase() === 'yesterday') {
+    from = moment().subtract(1, 'days').format('DD-MM-YYYY')
+  } else if (!(/^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[012])-20\d\d$/.test(from))) {
+    console.error('invalid date format. please use DD-MM-YYYY')
 
-  process.exit(1)
+    process.exit(1)
+  }
 }
 
 // --local
 const local = typeof argv.local !== 'undefined' && argv.local
-
 
 // file
 const file = argv.file
@@ -79,9 +82,7 @@ const writeRowFiles = (name) => () => {
 }
 
 Object.keys(FILES).forEach(name => {
-
   if (typeof file === 'undefined' || name === file) {
-
     // we don't need to download the files each time
     if (local) {
       console.info(`[local] ${name}`)
